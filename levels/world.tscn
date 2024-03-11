@@ -1,0 +1,70 @@
+[gd_scene load_steps=10 format=3 uid="uid://572luu3bu22m"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_dux2x"]
+[ext_resource type="Texture2D" uid="uid://cr1nbwmt5nhje" path="res://assets/craftpix-net-223841-free-city-enemies-pixel-art-sprite-sheets/1/Idle.png" id="1_kiffg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uckft"]
+atlas = ExtResource("1_kiffg")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo8l3"]
+atlas = ExtResource("1_kiffg")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qv3m2"]
+atlas = ExtResource("1_kiffg")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pemox"]
+atlas = ExtResource("1_kiffg")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qjqsb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uckft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mo8l3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qv3m2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pemox")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yx5fw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aad23"]
+size = Vector2(640, 20)
+
+[node name="World" type="Node2D"]
+
+[node name="Level" type="TileMap" parent="."]
+format = 2
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_dux2x")
+
+[node name="Anim" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(347, 147)
+sprite_frames = SubResource("SpriteFrames_qjqsb")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.402789
+
+[node name="Collision" type="CollisionShape2D" parent="Player"]
+position = Vector2(335, 154)
+shape = SubResource("CapsuleShape2D_yx5fw")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(320, 308)
+shape = SubResource("RectangleShape2D_aad23")
